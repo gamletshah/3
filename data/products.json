@@ -1,0 +1,37 @@
+[
+    {
+        "id": "1",
+        "name": "Смартфон",
+        "price": 29999,
+        "description": "Мощный смартфон с отличной камерой",
+        "categories": ["electronics"]
+    },
+    {
+        "id": "2",
+        "name": "Ноутбук",
+        "price": 59999,
+        "description": "Производительный ноутбук для работы и игр",
+        "categories": ["electronics"]
+    },
+    {
+        "id": "3",
+        "name": "Футболка",
+        "price": 1999,
+        "description": "Хлопковая футболка с принтом",
+        "categories": ["clothing"]
+    },
+    {
+        "id": "4",
+        "name": "Джинсы",
+        "price": 3999,
+        "description": "Классические синие джинсы",
+        "categories": ["clothing"]
+    },
+    {
+        "id": "5",
+        "name": "Умные часы",
+        "price": 12999,
+        "description": "Умные часы с функцией фитнес-трекера",
+        "categories": ["electronics", "clothing"]
+    }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" src="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Наши товары</h1>
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">Все</button>
+            <button class="filter-btn" data-category="electronics">Электроника</button>
+            <button class="filter-btn" data-category="clothing">Одежда</button>
+        </div>
+    </header>
+
+    <main class="products-container"></main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.products-container');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            // Загрузка товаров
+            fetch('/api/products')
+                .then(response => response.json())
+                .then(products => {
+                    renderProducts(products);
+                    
+                    // Фильтрация по категориям
+                    filterBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            filterBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            
+                            const category = btn.dataset.category;
+                            const filtered = category === 'all' 
+                                ? products 
+                                : products.filter(p => p.categories.includes(category));
+                            renderProducts(filtered);
+                        });
+                    });
+                });
+
+            function renderProducts(products) {
+                container.innerHTML = products.map(product => `
+                    <div class="product-card">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price} руб.</p>
+                        <p class="description">${product.description}</p>
+                        <div class="categories">
+                            ${product.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+    </script>
+</body>
+</html>
